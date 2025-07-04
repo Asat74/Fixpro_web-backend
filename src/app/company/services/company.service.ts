@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserStorageService } from '../../basic/services/storage/user-storage.service';
@@ -6,24 +6,29 @@ import { UserStorageService } from '../../basic/services/storage/user-storage.se
 const BASIC_URL = "http://localhost:8080/";
 
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root'
 })
 export class CompanyService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   postAd(adDTO: FormData): Observable<any> {
-  const userId = UserStorageService.getUserId();
-  return this.http.post(BASIC_URL + `api/company/ad/${userId}`, adDTO, {
-    headers: this.createAuthorizationHeader()
-  });
+    const userId = UserStorageService.getUserId();
+    const headers = this.createAuthorizationHeader();
+
+    return this.http.post(BASIC_URL + `api/company/ad/${userId}`, adDTO, { headers });
   }
 
-    createAuthorizationHeader(): HttpHeaders{
-      let authHeaders : HttpHeaders = new HttpHeaders();
-      return authHeaders.set(
-        'Authorization',
-        'Bearer ' + UserStorageService.getToken() )
-    }
+  private createAuthorizationHeader(): HttpHeaders {
+  const token = UserStorageService.getToken();
+  if (token) {
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  } else {
+    console.warn('No token found in UserStorageService');
+    return new HttpHeaders();
   }
+}
 
+}
