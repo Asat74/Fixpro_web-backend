@@ -1,12 +1,3 @@
-<form nz-form [formGroup]="validateForm" (ngSubmit)="searchAdbylName()" 
-      style="margin-top: 20px; margin-bottom: 20px; text-align:center;">
-
-  <input nz-input placeholder="Enter service to search" nzSize="large" style="width: 20%;" formControlName="service"/>
-
-  <button nz-button nzSize="large" nzType="primary" style="margin-left: 15px;" [disabled]="validateForm.invalid">Search</button>
-
-</form>
-
 <div class="bg">
   <div style="margin-top:10px;" class="child" *ngFor="let ad of ads">
     <div nz-row>
@@ -26,12 +17,19 @@
         </h5>
         <hr>
         <div style="float: right;">
+    <button nzSize="small" nz-button nzType="primary" [routerLink]="'/company/ad/' + ad.id">Update</button>
+    <button
+  (click)="deleteAd(ad.id)"
+  style="margin-left: 10px;"
+  nzSize="small"
+  nz-button
+  nzType="primary"
+  nzDanger
+>
+  Delete
+</button>
 
-            <button nzSize="small" nz-button nzType="primary" routerLink="/client/ad/{{ad.id}}">
-                View
-            </button>
-    
-         </div>
+</div>
 
     </div>
   </div>

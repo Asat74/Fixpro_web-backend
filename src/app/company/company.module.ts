@@ -11,13 +11,18 @@ import { CompanyComponent } from './company.component';
 import { CompanyDashboardComponent } from './pages/company-dashboard/company-dashboard.component';
 import { CreateAdComponent } from './pages/create-ad/create-ad.component';
 import { DemoNgZorroAntdModule } from '../DemoNgZorroAntdModule';
+import { AllAdsComponent } from './pages/all-ads/all-ads.component';
+import { UpdateAdComponent } from './pages/update-ad/update-ad.component';
 
 
 @NgModule({
   declarations: [
     CompanyComponent,
     CompanyDashboardComponent,
-    CreateAdComponent
+    CreateAdComponent,
+    AllAdsComponent,
+    
+    
   ],
   imports: [
     CommonModule,
@@ -27,7 +32,8 @@ import { DemoNgZorroAntdModule } from '../DemoNgZorroAntdModule';
     NzInputModule,
     NzButtonModule,
     NzGridModule,
-    DemoNgZorroAntdModule
+    DemoNgZorroAntdModule,
+    UpdateAdComponent,
   ]
 })
 export class CompanyModule { }
